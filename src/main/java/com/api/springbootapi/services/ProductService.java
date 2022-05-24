@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.api.springbootapi.models.entities.Product;
+import com.api.springbootapi.models.entities.Supplier;
 import com.api.springbootapi.models.repos.ProductRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,14 @@ public class ProductService {
 
     public void removeOne(Long id){
         productRepo.deleteById(id);
+    }
+
+    public void addSupplier(Supplier supplier, Long productId){
+        Product product = findOne(productId);
+        if(product == null){
+            throw new RuntimeException("Product with ID: "+product+" not found");
+        }
+        product.getSupplier().add(supplier);
+        save(product); 
     }
 }
