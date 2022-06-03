@@ -17,10 +17,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tbl_supplier")
-@JsonIdentityInfo(
+/* @JsonIdentityInfo(
     generator = ObjectIdGenerators.PropertyGenerator.class,
     property = "id"
-)
+) */
 public class Supplier implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,7 +37,7 @@ public class Supplier implements Serializable{
     private String email;
 
     @ManyToMany(mappedBy = "supplier")
-    //@JsonBackReference
+    @JsonBackReference
     private Set<Product> products;
 
     public Long getId() {

@@ -1,7 +1,10 @@
 package com.api.springbootapi.controllers;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.api.springbootapi.dto.ResponseData;
+import com.api.springbootapi.dto.SearchData;
 import com.api.springbootapi.models.entities.Product;
 import com.api.springbootapi.models.entities.Supplier;
 import com.api.springbootapi.services.ProductService;
@@ -81,5 +84,25 @@ public class ProductController {
     @PostMapping("/{id}")
     public void addSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long productId){
         productService.addSupplier(supplier, productId);
+    }
+
+    @PostMapping("search/name")
+    public Product getProdyctByName(@RequestBody SearchData SearchData){
+        return productService.findProductByName(SearchData.getSearchKey());
+    }
+
+    @PostMapping("search/namelike")
+    public List<Product> getProdyctByNameLike(@RequestBody SearchData SearchData){
+        return productService.findProductByNameLike(SearchData.getSearchKey());
+    }
+
+    @GetMapping("search/category/{categoryId}")
+    public List<Product> getProdyctByCategory(@PathVariable("categoryId") Long categoryId){
+        return productService.findProductByCategory(categoryId);
+    }
+
+    @GetMapping("search/supplier/{supplierId}")
+    public List<Product> getProdyctBySupplier(@PathVariable("supplierId") Long supplierId){
+        return productService.findProductBySupplier(supplierId);
     }
 }
