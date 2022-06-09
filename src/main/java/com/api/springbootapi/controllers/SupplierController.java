@@ -1,8 +1,11 @@
 package com.api.springbootapi.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.api.springbootapi.dto.ResponseData;
+import com.api.springbootapi.dto.SearchData;
 import com.api.springbootapi.dto.SupplierData;
 import com.api.springbootapi.models.entities.Supplier;
 import com.api.springbootapi.services.SupplierService;
@@ -84,6 +87,26 @@ public class SupplierController {
         responseData.setStatus(true);
         responseData.setPayload(supplierService.save(supplier));
         return ResponseEntity.ok(responseData);
+    }
+
+    @PostMapping("search/byemail")
+    public Supplier findByEmail(@RequestBody SearchData searchData){
+        return supplierService.findByEmail(searchData.getSearchKey());
+    }
+
+    @PostMapping("search/byname")
+    public List<Supplier> findByName(@RequestBody SearchData searchData){   
+        return supplierService.findByName(searchData.getSearchKey());
+    }
+
+    @PostMapping("search/bynamestartwith")
+    public List<Supplier> findByNameStartWith(@RequestBody SearchData searchData){   
+        return supplierService.findByNameStartWith(searchData.getSearchKey());
+    }
+
+    @PostMapping("search/bynameoremail")
+    public List<Supplier> findByNameOrEmail(@RequestBody SearchData searchData){   
+        return supplierService.findByNameOrEmail(searchData.getSearchKey(), searchData.getOtherSearchKey());
     }
 
 }

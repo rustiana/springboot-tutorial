@@ -1,5 +1,6 @@
 package com.api.springbootapi.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -34,5 +35,21 @@ public class SupplierService {
 
     public void removeOne(Long id){
         supplierRepo.findById(id);
+    }
+
+    public Supplier findByEmail(String email ){
+        return supplierRepo.findByEmail(email);
+    }
+
+    public List<Supplier> findByName(String name){
+        return supplierRepo.findByNameContainsOrderByIdDesc(name);
+    }
+
+    public List<Supplier> findByNameStartWith(String prefix){
+        return supplierRepo.findByNameStartingWith(prefix);
+    }
+
+    public List<Supplier> findByNameOrEmail(String name, String email){
+        return supplierRepo.findByNameContainsOrEmailContains(name, email);
     }
 }
