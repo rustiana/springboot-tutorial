@@ -9,8 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tbl_category")
+@Getter
+@Setter
 public class Category extends BaseEntity<String> implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
@@ -20,7 +25,7 @@ public class Category extends BaseEntity<String> implements Serializable{
     @Column(length = 100, nullable = false, unique = true)
     private String name;
 
-    public Long getId() {
+    /* public Long getId() {
         return id;
     }
 
@@ -34,7 +39,7 @@ public class Category extends BaseEntity<String> implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
+    } */
 
     
 }
